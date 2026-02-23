@@ -92,6 +92,8 @@ function toggleStyle(id) {
     const paragraph = parentNode.querySelector('.paragraph').innerText;
     // console.log(companyName , position, salary, badge, paragraph);
 
+    parentNode.querySelector('.badge').innerText = 'interview';
+
     const cardInfo = {
         companyName , 
         position, 
@@ -101,11 +103,10 @@ function toggleStyle(id) {
     }
     // console.log(cardInfo);
 
-    const interviewExist = interviewList.find(item => item.company-name == cardInfo.company-name);
+    const interviewExist = interviewList.find(
+    item => item.companyName === cardInfo.companyName);
 
     // badge.classList.remove('bg-blue-50');
-
-    parentNode.querySelector('.badge').innerHTML = `<button class="interview-btn btn btn-outline btn-primary">INTERVIEW</button>`;
 
     if(!interviewExist) {
         interviewList.push(cardInfo);
@@ -123,19 +124,15 @@ function renderInterview() {
         div.className = 'bg-white shadow-lg p-5 rounded-lg mb-5';
         div.innerHTML = `
             <div class="flex justify-between">
-                        <h3 class="company-name font-semibold text-[20px]">Mobile First Corp</h3>
+                        <h3 class="company-name font-semibold text-[20px]">${interview.companyName}</h3>
                         <a href=""><img src="assets/Group 1.png" alt=""></a>
                     </div>
-                    <h5 class="position text-[18px] text-gray-500">React Native Developer</h5>
+                    <h5 class="position text-[18px] text-gray-500">${interview.position}</h5>
                     <p class="salary flex gap-4 text-gray-500 py-3">
-                        <span>Remote</span>
-                        <span>•</span>
-                        <span>Full-time</span>
-                        <span>•</span>
-                        <span>$130,000 - $175,000</span>
+                        ${interview.salary}
                     </p>
                     <button class="badge bg-blue-50 px-3 py-2 my-2 text-[16px] rounded-sm">NOT APPLIED</button>
-                    <p class="paragraph text-[#323B49]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <p class="paragraph text-[#323B49]">${interview.paragraph}</p>
                     <!-- btn -->
                      <div class="flex gap-5 pt-6 rounded-lg">
                         <button class="btn btn-outline btn-primary">INTERVIEW</button>
