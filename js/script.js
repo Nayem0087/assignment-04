@@ -79,10 +79,12 @@ function toggleStyle(id) {
 
             if(currentStatus === 'interview-filter-btn'){
                 renderInterview();
+                toggleEmptyState(interviewList);
             }
 
             if(currentStatus === 'rejected-filter-btn'){
                 renderRejected();
+                toggleEmptyState(rejectedList);
             }
         }
     }
@@ -121,6 +123,7 @@ function toggleStyle(id) {
 
     if(currentStatus = 'rejected-filter-btn') {
         renderRejected();
+        toggleEmptyState(rejectedList);
     }
     
     // rejected section
@@ -156,6 +159,7 @@ function toggleStyle(id) {
 
     if(currentStatus = 'interview-filter-btn') {
         renderInterview();
+        toggleEmptyState(interviewList);
     }
 
         }
@@ -188,6 +192,7 @@ function renderInterview() {
         `
         filteredSection.appendChild(div);
     }
+    toggleEmptyState(interviewList);
 }
 
 // rejected call
@@ -216,5 +221,18 @@ function renderRejected() {
                      </div>
         `
         filteredSection.appendChild(div);
+    }
+    toggleEmptyState(rejectedList);
+}
+
+// no job available section
+function toggleEmptyState(list) {
+
+    const emptyState = document.getElementById('empty-state');
+
+    if(list.length === 0){
+        emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
     }
 }
