@@ -63,7 +63,32 @@ function toggleStyle(id) {
  
 
     mainContainer.addEventListener('click', function(event) {
-        
+        // card delete 
+         if(event.target.classList.contains('delete-btn')){
+        const parentNode = event.target.closest('.card');
+        const companyName = parentNode.querySelector('.company-name').innerText;
+
+        const confirmDelete = confirm('Are you sure you want to delete this card?');
+
+        if(confirmDelete){
+            parentNode.remove();
+            interviewList = interviewList.filter(item => item.companyName !== companyName);
+            rejectedList = rejectedList.filter(item => item.companyName !== companyName);
+
+            calculateCount();
+
+            if(currentStatus === 'interview-filter-btn'){
+                renderInterview();
+            }
+
+            if(currentStatus === 'rejected-filter-btn'){
+                renderRejected();
+            }
+        }
+    }
+
+        // card transfer 
+        // interview section
         if(event.target.classList.contains('interview-btn')){
             const parentNode = event.target.parentNode.parentNode;
     const companyName = parentNode.querySelector('.company-name').innerText;
@@ -98,6 +123,7 @@ function toggleStyle(id) {
         renderRejected();
     }
     
+    // rejected section
         } else if(event.target.classList.contains('rejected-btn')){
             const parentNode = event.target.parentNode.parentNode;
     const companyName = parentNode.querySelector('.company-name').innerText;
@@ -135,6 +161,7 @@ function toggleStyle(id) {
         }
     })
 
+    // interview call 
 function renderInterview() {
     filteredSection.innerHTML = '';
 
@@ -163,6 +190,7 @@ function renderInterview() {
     }
 }
 
+// rejected call
 function renderRejected() {
     filteredSection.innerHTML = '';
 
