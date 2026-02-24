@@ -49,13 +49,14 @@ function toggleStyle(id) {
     if(id == 'interview-filter-btn'){
         allCards.classList.add('hidden');
         filteredSection.classList.remove('hidden');
+        renderInterview();
     } else if(id == 'all-filter-btn'){
         filteredSection.classList.add('hidden');
         allCards.classList.remove('hidden');
     } else if(id == 'rejected-filter-btn'){
         allCards.classList.add('hidden');
         filteredSection.classList.remove('hidden');
-        // renderRejected();
+        renderRejected();
     } 
     // console.log(allCards.classList);
 }
@@ -93,8 +94,10 @@ function toggleStyle(id) {
 
     calculateCount();
 
-    renderInterview();
-
+    if(currentStatus = 'rejected-filter-btn') {
+        renderRejected();
+    }
+    
         } else if(event.target.classList.contains('rejected-btn')){
             const parentNode = event.target.parentNode.parentNode;
     const companyName = parentNode.querySelector('.company-name').innerText;
@@ -123,13 +126,11 @@ function toggleStyle(id) {
 
     interviewList = interviewList.filter(item => item.companyName != cardInfo.companyName);
 
-    // if(currentStatus == 'interview-filter-btn'){
-    //     renderInterview();
-    // }
+     calculateCount();
 
-    calculateCount();
-
-    renderRejected();
+    if(currentStatus = 'interview-filter-btn') {
+        renderInterview();
+    }
 
         }
     })
@@ -154,8 +155,8 @@ function renderInterview() {
                     <p class="paragraph text-[#323B49]">${interview.paragraph}</p>
                     <!-- btn -->
                      <div class="flex gap-5 pt-6 rounded-lg">
-                        <button class="btn-interview btn btn-outline btn-primary">INTERVIEW</button>
-                        <button class="btn-rejected btn btn-outline btn-error">REJECTED</button>
+                        <button class="interview-btn btn btn-outline btn-primary">INTERVIEW</button>
+                        <button class="rejected-btn btn btn-outline btn-error">REJECTED</button>
                      </div>
         `
         filteredSection.appendChild(div);
@@ -182,8 +183,8 @@ function renderRejected() {
                     <p class="paragraph text-[#323B49]">${rejected.paragraph}</p>
                     <!-- btn -->
                      <div class="flex gap-5 pt-6 rounded-lg">
-                        <button class="btn-interview btn btn-outline btn-primary">INTERVIEW</button>
-                        <button class="btn-rejected btn btn-outline btn-error">REJECTED</button>
+                        <button class="interview-btn btn btn-outline btn-primary">INTERVIEW</button>
+                        <button class="rejected-btn btn btn-outline btn-error">REJECTED</button>
                      </div>
         `
         filteredSection.appendChild(div);
